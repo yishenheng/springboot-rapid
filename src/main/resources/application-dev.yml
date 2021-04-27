@@ -1,13 +1,18 @@
 server:
-  port: 1114
+  port: 4567
 spring:
   application:
     name: rapid
+  rabbitmq:
+    password: 1464629823
+    username: ysh
+    host: 127.0.0.1
+    virtual-host: msg
   datasource:
     # 表明使用Druid连接池
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ysh-test?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/rapid?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false
     username: root
     password: Ysh0113.
     druid:
@@ -49,5 +54,26 @@ spring:
         allow:
         deny:
       db-type: mysql
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: Ysh0113.
+    lettuce:
+      pool:
+        max_active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 1000
 mybatis-plus:
   mapper-locations: classpath*:/mappers/*Mapper.xml
+
+
+rapid:
+  jwt:
+    # 加密盐
+    secret: Ysh0113.
+    # 有效时间
+    expire: 3600
+    # header名称
+    header: token
+
