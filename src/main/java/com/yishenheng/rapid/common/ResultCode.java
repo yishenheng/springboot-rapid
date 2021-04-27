@@ -22,7 +22,7 @@ public enum ResultCode {
      */
     SUCCESS(200, "SUCCESS"),
 
-    ;
+    TOKEN_ERROR(401, "token异常");
 
     private final int code;
     private final String message;

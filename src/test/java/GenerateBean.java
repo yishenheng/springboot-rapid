@@ -22,11 +22,11 @@ public class GenerateBean {
     private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
     private static final String DATASOURCE_USERNAME = "root";
     private static final String DATASOURCE_PASWORD = "Ysh0113.";
-    private static final String DATASOUORCE_URL = "jdbc:mysql://localhost:3306/ysh-test";
+    private static final String DATASOUORCE_URL = "jdbc:mysql://119.45.47.147:3306/rapid";
 
 
     public static void main(String[] args) {
-        String[] tables = {"user"};
+        String[] tables = {"t_menu", "t_role", "t_role_menu", "t_user", "t_user_role"};
         String projectName = "/";
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator().setGlobalConfig(
@@ -56,7 +56,7 @@ public class GenerateBean {
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
-                        .setTablePrefix("")// 此处可以修改为您的表前缀
+                        .setTablePrefix("t_")// 此处可以修改为您的表前缀
                         .setNaming(NamingStrategy.underline_to_camel)// 表名生成策略
                         .setInclude(tables) // 需要生成的表
                         .setEntityLombokModel(true)
