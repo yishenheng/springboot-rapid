@@ -1,5 +1,6 @@
 package com.yishenheng.rapid.config.rabbitmq;
 
+import com.yishenheng.rapid.constant.RabbitMqConstant;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -21,32 +22,24 @@ public class FanoutRabbitMqConfig {
     // 3.交换机和队列绑定
 
 
-    private static final String FANOUT_NAME = "fanoutYsh";
-
-    private static final String QUEUE_NAME = "yshTest";
-
-    private static final String QUEUE_NAME1 = "yshTest1";
-
-    private static final String QUEUE_NAME2 = "yshTest2";
-    
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange(FANOUT_NAME);
+        return new FanoutExchange(RabbitMqConstant.FANOUT_EXCHANGE_NAME);
     }
 
     @Bean
     public Queue createTestQueue() {
-        return new Queue(QUEUE_NAME, true, false, true);
+        return new Queue(RabbitMqConstant.FANOUT_QUEUE, true, false, true);
     }
 
     @Bean
     public Queue createTestQueue1() {
-        return new Queue(QUEUE_NAME1, true, false, true);
+        return new Queue(RabbitMqConstant.FANOUT_QUEUE1, true, false, true);
     }
 
     @Bean
     public Queue createTestQueue2() {
-        return new Queue(QUEUE_NAME2, true, false, true);
+        return new Queue(RabbitMqConstant.FANOUT_QUEUE2, true, false, true);
     }
 
     @Bean
