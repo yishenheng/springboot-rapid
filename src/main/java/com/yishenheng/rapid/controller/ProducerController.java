@@ -1,6 +1,7 @@
 package com.yishenheng.rapid.controller;
 
 import cn.hutool.core.date.DateUtil;
+import com.yishenheng.rapid.constant.RabbitMqConstant;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +34,7 @@ public class ProducerController {
     @PostMapping("/work")
     public void addWorkMessage() {
         for (int i = 0; i < 10; i++) {
-            this.rabbitTemplate.convertAndSend("directQueue", i + "");
+            this.rabbitTemplate.convertAndSend(RabbitMqConstant.DIRECT_QUEUE, i + "");
         }
     }
 
@@ -46,6 +47,13 @@ public class ProducerController {
         map.put("date", DateUtil.now());
         map.put("msg", "hello 广播的消息类型");
         map.put("count", 10);
-        this.rabbitTemplate.convertAndSend("fanoutYsh","", map);
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.FANOUT_EXCHANGE_NAME, "", map);
+    }
+
+
+    @PostMapping("/routing")
+    public void addRoutingMessage() {
+        String info = "hello routing";
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.ROUTING_DIRECT, RabbitMqConstant.DIRECT_WITH_B, info);
     }
 }

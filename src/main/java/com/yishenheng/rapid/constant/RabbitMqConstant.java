@@ -6,6 +6,8 @@ package com.yishenheng.rapid.constant;
  */
 public interface RabbitMqConstant {
 
+    String DIRECT_QUEUE = "directQueue";
+
     String FANOUT_QUEUE = "yshTest";
 
     String FANOUT_QUEUE1 = "yshTest1";
@@ -13,4 +15,15 @@ public interface RabbitMqConstant {
     String FANOUT_QUEUE2 = "yshTest2";
 
     String FANOUT_EXCHANGE_NAME = "fanoutYsh";
+
+
+    String ROUTING_DIRECT = "routingDirect";
+
+
+    String DIRECT_WITH_A = "a";
+
+    String DIRECT_WITH_B = "b";
+
+    String DIRECT_WITH_C = "c";
+
 }
