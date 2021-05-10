@@ -20,6 +20,15 @@ public interface RabbitMqConstant {
     String ROUTING_DIRECT = "routingDirect";
 
 
+    String TOPIC_NAME = "topics";
+
+    String TOPIC_WITH_SINGLE = "topics.*";
+
+    String TOPIC_WITH_TWO= "topics.*.*";
+
+    String TOPIC_WITH_ARBITRARY = "topics.#";
+
+
     String DIRECT_WITH_A = "a";
 
     String DIRECT_WITH_B = "b";

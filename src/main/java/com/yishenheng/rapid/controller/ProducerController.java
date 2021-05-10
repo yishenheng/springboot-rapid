@@ -51,9 +51,24 @@ public class ProducerController {
     }
 
 
+    /**
+     * 路由
+     */
     @PostMapping("/routing")
     public void addRoutingMessage() {
-        String info = "hello routing";
+        String info = "hello routing date:" + DateUtil.now();
         this.rabbitTemplate.convertAndSend(RabbitMqConstant.ROUTING_DIRECT, RabbitMqConstant.DIRECT_WITH_B, info);
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.ROUTING_DIRECT, RabbitMqConstant.DIRECT_WITH_A, info);
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.ROUTING_DIRECT, RabbitMqConstant.DIRECT_WITH_C, info);
     }
+
+    /**
+     * 路由
+     */
+    @PostMapping("/topics")
+    public void addTopicMessage() {
+        String info = "hello topic date:" + DateUtil.now();
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.TOPIC_NAME, "topics.a.x.((((((.asdas", info);
+    }
+
 }
