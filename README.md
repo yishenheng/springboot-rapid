@@ -11,7 +11,7 @@
 4. 日志管理：slf4j
 5. AOP切面：SpringAOP
 6. 数据库：MySQL
-
+7. MQ:Rabbitmq
 # 项目结构
 单体架构 基于jdk8+开发，使用maven进行项目管理。具体目录如下：
 ```
