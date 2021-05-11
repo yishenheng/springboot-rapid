@@ -1,8 +1,11 @@
 package com.yishenheng.rapid.config.rabbitmq.consumer;
 
-        import lombok.extern.slf4j.Slf4j;
-        import org.springframework.amqp.rabbit.annotation.RabbitListener;
-        import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.Queue;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 
 /**
  * @author yishenheng
@@ -18,19 +21,15 @@ public class ConsumerTopicRabbitMq {
      *
      * @param content 内容
      */
-    @RabbitListener(queues = "#{topicQueue.name}")
+    @RabbitListener(
+            bindings = @QueueBinding(
+                    value = @Queue(),
+                    key = {"topic.*", "topic.*.*"},
+                    exchange = @Exchange(type = "topic", name = "topics")
+            )
+    )
     public void topicsSingleWordPrint(String content) {
         log.info("singleWord=========>{}", content);
-    }
-
-    /**
-     * 消费topic.*.* 的内容
-     *
-     * @param content 内容
-     */
-    @RabbitListener(queues = "#{topicQueue1.name}")
-    public void topicsTwoWordPrint(String content) {
-        log.info("twoWord=========>{}", content);
     }
 
     /**
@@ -38,7 +37,13 @@ public class ConsumerTopicRabbitMq {
      *
      * @param content 内容
      */
-    @RabbitListener(queues = "#{topicQueue2.name}")
+    @RabbitListener(
+            bindings = @QueueBinding(
+                    value = @Queue(),
+                    key = {"topic.#"},
+                    exchange = @Exchange(type = "topic", name = "topics")
+            )
+    )
     public void topicsArbitraryWordPrint(String content) {
         log.info("arbitraryWord=========>{}", content);
     }

@@ -68,7 +68,7 @@ public class ProducerController {
     @PostMapping("/topics")
     public void addTopicMessage() {
         String info = "hello topic date:" + DateUtil.now();
-        this.rabbitTemplate.convertAndSend(RabbitMqConstant.TOPIC_NAME, "topics.a.x.((((((.asdas", info);
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.TOPIC_NAME, "topic.a.x.((((((.asdas", info);
     }
 
 }
