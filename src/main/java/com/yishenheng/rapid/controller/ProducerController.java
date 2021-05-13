@@ -1,6 +1,7 @@
 package com.yishenheng.rapid.controller;
 
 import cn.hutool.core.date.DateUtil;
+import com.yishenheng.rapid.constant.DeadLetterConstant;
 import com.yishenheng.rapid.constant.RabbitMqConstant;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,4 +72,9 @@ public class ProducerController {
         this.rabbitTemplate.convertAndSend(RabbitMqConstant.TOPIC_NAME, "topic.a.x.((((((.asdas", info);
     }
 
+    @PostMapping("/deadLetter")
+    public void addDeadLetterMessage() {
+        String info = "test" + DateUtil.now();
+        this.rabbitTemplate.convertAndSend(DeadLetterConstant.BUSINESS_EXCHANGE_NAME, "", info);
+    }
 }
