@@ -7,6 +7,7 @@ package com.yishenheng.rapid.constant;
 public interface RabbitMqConstant {
 
     String DIRECT_QUEUE = "directQueue";
+    String TEST_TTL_QUEUE_NAME = "ttlQueue";
 
     String FANOUT_QUEUE = "yshTest";
 
@@ -35,4 +36,10 @@ public interface RabbitMqConstant {
 
     String DIRECT_WITH_C = "c";
 
+
+    String  DELAY_EXCHANGE_NAME = "delayExchange";
+
+    String  DELAYED_KEY_NAME = "delayedKey";
+
+    String  DELAYED_QUEUE_NAME = "delayQueue";
 }

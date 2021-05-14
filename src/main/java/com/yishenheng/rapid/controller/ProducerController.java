@@ -37,6 +37,9 @@ public class ProducerController {
         for (int i = 0; i < 10; i++) {
             this.rabbitTemplate.convertAndSend(RabbitMqConstant.DIRECT_QUEUE, i + "");
         }
+
+
+        this.rabbitTemplate.convertAndSend(RabbitMqConstant.TEST_TTL_QUEUE_NAME, "test");
     }
 
     /**
@@ -77,4 +80,16 @@ public class ProducerController {
         String info = "test" + DateUtil.now();
         this.rabbitTemplate.convertAndSend(DeadLetterConstant.BUSINESS_EXCHANGE_NAME, "", info);
     }
+
+    @PostMapping("/delayed")
+    public void delayedMessage() throws InterruptedException {
+        System.out.println("发送消息的时间:{}" + DateUtil.now());
+        String context = "test delay message date:" + DateUtil.now();
+        rabbitTemplate.convertAndSend(RabbitMqConstant.DELAY_EXCHANGE_NAME, RabbitMqConstant.DELAYED_KEY_NAME, context, info -> {
+            info.getMessageProperties().setDelay(6000);
+            return info;
+        });
+
+    }
+
 }
