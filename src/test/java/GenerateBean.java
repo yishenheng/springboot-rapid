@@ -20,9 +20,9 @@ import java.util.Map;
 public class GenerateBean {
 
     private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
-    private static final String DATASOURCE_USERNAME = "root";
-    private static final String DATASOURCE_PASWORD = "Ysh0113.";
-    private static final String DATASOUORCE_URL = "jdbc:mysql://119.45.47.147:3306/rapid";
+    private static final String DATASOURCE_USERNAME = "11111";
+    private static final String DATASOURCE_PASWORD = "1111111.";
+    private static final String DATASOUORCE_URL = "jdbc:mysql://127.0.0.1:3306/rapid";
 
 
     public static void main(String[] args) {
