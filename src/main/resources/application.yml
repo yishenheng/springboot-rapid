@@ -1,4 +1,78 @@
-#当前激活配置
+server:
+  port: 4567
 spring:
-  profiles:
-    active: dev
+  application:
+    name: rapid
+  rabbitmq:
+    password: 1464629823
+    username: ysh
+    host: 127.0.0.1
+    virtual-host: msg
+  datasource:
+    # 表明使用Druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ysh?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: 1111
+    password: 123456789.
+    druid:
+      #初始化时建立物理连接的个数。
+      initial-size: 5
+      #最大连接池数量
+      max-active: 20
+      #最小连接池数量
+      min-idle: 5
+      #获取连接时最大等待时间，单位毫秒
+      max-wait: 3000
+      #是否缓存preparedStatement，也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
+      pool-prepared-statements: true
+      #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-open-prepared-statements: 100
+      # 配置连接在池中的最小生存时间
+      max-evictable-idle-time-millis: 400000
+      min-evictable-idle-time-millis: 300000
+      #配置检测可以关闭的空闲连接间隔时间
+      time-between-eviction-runs-millis: 60000
+      #监控统计的stat,以及防sql注入的wall
+      filters: stat,wall
+      #Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      aop-patterns: com.operation.manager.service.*
+      web-stat-filter:
+        #是否启用StatFilter默认值true
+        enabled: true
+        #添加过滤规则
+        url-pattern: /*
+        #忽略过滤的格式
+        ##exclusions: *.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*
+      stat-view-servlet:
+        #是否启用StatViewServlet默认值true
+        enabled: true
+        #访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重置数据
+        reset-enable: false
+        allow:
+        deny:
+      db-type: mysql
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: Ysh0113.
+    lettuce:
+      pool:
+        max_active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 1000
+mybatis-plus:
+  mapper-locations: classpath*:/mappers/*Mapper.xml
+
+
+rapid:
+  jwt:
+    # 加密盐
+    secret: Ysh0113.
+    # 有效时间
+    expire: 3600
+    # header名称
+    header: token
